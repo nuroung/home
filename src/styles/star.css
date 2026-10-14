@@ -1,0 +1,64 @@
+/* 오리온 ◉ 별. 호버·선택·팝은 Motion, 여기엔 모양만 둔다. */
+.star {
+  display: block;
+  position: absolute;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.star:focus {
+  outline: none;
+}
+.star .aura {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 192, 218, 0.18), rgba(196, 192, 218, 0) 62%);
+  pointer-events: none;
+}
+.star .ripple {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(214, 210, 232, 0.6);
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+}
+.star .core {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.star .ring {
+  position: absolute;
+  border: 1px solid #e9e6f2;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.star .dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+}
+.star .label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: #e9e6f2;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.star .mark {
+  position: absolute;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  margin-left: -1.5px;
+  border-radius: 50%;
+  background: #e9e6f2;
+  pointer-events: none;
+}

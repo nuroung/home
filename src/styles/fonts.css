@@ -1,0 +1,20 @@
+/* 필자 폰트. woff2 를 먼저 읽고, 안 되면 ttf. */
+@font-face {
+  font-family: 'HakgyoansimNadeuri';
+  src:
+    url('/fonts/hakgyoansim-nadeuri-l.woff2') format('woff2'),
+    url('/fonts/hakgyoansim-nadeuri-l.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GriunHangeulDdurae';
+  src:
+    url('/fonts/griun-hangeul-ddurae-rg.woff2') format('woff2'),
+    url('/fonts/griun-hangeul-ddurae-rg.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

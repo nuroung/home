@@ -1,0 +1,11 @@
+id: ship
+anchor: ship
+label: 부유하는 배
+eyebrow: FLOATING VESSEL
+title: 부유하는 배
+verdict: 해당 없음
+content:
+  - i: |
+      내 배!
+  - r: |
+      ...네 배.

@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&family=Noto+Sans+KR:wght@300;400&family=IBM+Plex+Mono:wght@300;400&display=swap');
+
+/* 글꼴은 여기서만 정한다. 화면에서는 var(--font-*) 로 쓴다. */
+:root {
+  /* 공용 글꼴: 제목·판단 결과·라벨·헤더 등 */
+  --font-serif: 'Noto Serif KR', serif;
+  --font-sans: 'Noto Sans KR', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* 필자 글꼴: 패널 본문(content 문단)에만 쓴다. content/authors.yaml 의 font 값이
+     body-r 면 --font-body-r, --font-body-r-size … 를 읽는다. 폰트마다 크기·굵기·행간이
+     다르게 느껴지면 아래 값만 고치면 된다. (r = 라온, i = 일룩시아) */
+  --font-body-r: 'GriunHangeulDdurae', 'Noto Serif KR', serif;
+  --font-body-r-size: 18px;
+  --font-body-r-line: 1.6;
+  --font-body-r-weight: 400;
+
+  --font-body-i: 'HakgyoansimNadeuri', 'Noto Serif KR', serif;
+  --font-body-i-size: 18px;
+  --font-body-i-line: 1.6;
+  --font-body-i-weight: 400;
+}

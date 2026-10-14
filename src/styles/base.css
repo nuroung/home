@@ -1,0 +1,117 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #0b0c18;
+  color: #e9e6f2;
+  font-family: var(--font-sans);
+}
+
+button {
+  font: inherit;
+}
+
+/* 높이 기준 + 가로 확장 레이아웃. 값은 Stage.tsx 가 resize 때 넣는다 (scene/layout.ts 참고).
+   --s 배율, --w 무대 너비(단위), --top 세로 가운데 정렬 여백(px), --top-u 같은 값을 단위로 */
+.viewport {
+  --s: 1;
+  --w: 1920;
+  --top: 0px;
+  --top-u: 0;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0b0c18 0%, #0f1122 55%, #14172b 100%);
+}
+
+/* 탭이 숨겨진 동안은 모든 CSS 애니메이션을 멈춘다 (Stage.tsx 가 클래스를 붙인다) */
+.viewport.is-hidden * {
+  animation-play-state: paused !important;
+}
+
+/* 무대: 높이 1080 단위 고정, 너비는 W 단위. 레터박스 없이 뷰포트를 채운다 */
+.stage {
+  position: absolute;
+  left: 0;
+  top: var(--top);
+  width: calc(var(--w) * 1px);
+  height: 1080px;
+  transform-origin: 0 0;
+  transform: scale(var(--s));
+  color: #e9e6f2;
+  font-family: var(--font-sans);
+}
+
+/* 중앙 기준 묶음: 가운데에서 960 왼쪽에 1920 폭 좌표계를 놓으면 그 안의 원 중심(800)이 W/2 − 160 이 된다 */
+.center {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  margin-left: -960px;
+  pointer-events: none;
+}
+
+/* 배경(블러·먼지): 무대와 같은 단위·배율로 뷰포트 전체를 덮는다 */
+.backdrop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% / var(--s));
+  height: calc(100% / var(--s));
+  transform-origin: 0 0;
+  transform: scale(var(--s));
+  pointer-events: none;
+}
+.backdrop-center {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--top-u) * 1px);
+  width: 1920px;
+  height: 1080px;
+  margin-left: -960px;
+}
+
+/* 데스크톱 전용 안내 화면 */
+.gate {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #0b0c18 0%, #0f1122 55%, #14172b 100%);
+  color: #e9e6f2;
+  font-family: var(--font-serif);
+}
+.gate-header {
+  position: absolute;
+  left: 32px;
+  top: 28px;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.3em;
+}
+.gate-message {
+  margin: 0;
+  padding: 0 24px;
+  text-align: center;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.8;
+  letter-spacing: 0.03em;
+  color: rgba(233, 230, 242, 0.74);
+}
+.gate-line {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(233, 230, 242, 0), rgba(233, 230, 242, 0.4) 20%, rgba(233, 230, 242, 0.4) 80%, rgba(233, 230, 242, 0));
+}

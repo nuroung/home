@@ -1,0 +1,76 @@
+/* 상시 움직임(별 깜빡임·공전·먼지·떠다니기·별똥별)은 전부 CSS keyframes.
+   A↔B 전환과 인터랙션은 Motion 이 맡는다. */
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+@keyframes starBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+/* 작은 점 별: 원래 그룹 투명도 0.85 위에서 1 → 0.3 으로 깜빡이던 것과 같은 결과 */
+@keyframes starBlinkDim {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 0.255; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); filter: blur(6px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes meteor {
+  0% { transform: translateY(-20px); opacity: 0; }
+  18% { opacity: 1; }
+  65% { opacity: 0.9; }
+  100% { transform: translateY(78px); opacity: 0; }
+}
+@keyframes bobUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes driftA {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes floatC {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 공전. B 에 들어올 때마다 이름을 A/B 로 바꿔 처음부터 다시 돌게 한다. */
+@keyframes orbitA { to { transform: rotate(360deg); } }
+@keyframes orbitB { to { transform: rotate(360deg); } }
+@keyframes orbitRevA { to { transform: rotate(-360deg); } }
+@keyframes orbitRevB { to { transform: rotate(-360deg); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 선택된 대상의 2초 파동 */
+@keyframes wave {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(4.5); opacity: 0; }
+}
+@keyframes shipWave {
+  0% { transform: scale(1.4); opacity: 0.7; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* 패널 타이핑 */
+@keyframes typeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes typeFade { from { opacity: 0; } to { opacity: 1; } }
+
+/* 먼지 */
+@keyframes dustA {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(14px, -40px); }
+  100% { transform: translate(-10px, -80px); }
+}
+@keyframes dustB {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-22px, -26px); }
+  100% { transform: translate(12px, -64px); }
+}
+@keyframes dustC {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(18px, 24px); }
+  100% { transform: translate(30px, -24px); }
+}
