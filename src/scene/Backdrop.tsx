@@ -131,7 +131,8 @@ export function Backdrop() {
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: 'url(/noise.png)',
+          // 배포 주소가 /home/ 처럼 하위 경로여도 되도록 base 를 붙인다 (인라인 style 의 경로는 Vite 가 바꿔 주지 않는다)
+          backgroundImage: `url(${import.meta.env.BASE_URL}noise.png)`,
           backgroundRepeat: 'repeat',
           backgroundSize: '256px 256px',
           pointerEvents: 'none',

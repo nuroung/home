@@ -32,3 +32,12 @@ export const TAP_KEYFRAMES_ORBIT = [1, 0.7, 1.3, 1]
 export const TYPE_STEP = 0.035
 export const TYPE_START = 0.05
 export const TYPE_GAP = 0.12
+
+/**
+ * 본문(content)에서 느리게 찍는 곳(초). 글자 사이 기본 간격(TYPE_STEP)에 더해진다.
+ * 쉼표(,)와 말줄임표(...)만 쉬고, 홑마침표(.)는 보통 속도로 찍는다.
+ */
+export const TYPE_PAUSE_COMMA = 0.2
+/** 말줄임표: 앞의 점들은 짧게, 마지막 점은 길게 쉰다 */
+export const TYPE_PAUSE_ELLIPSIS = 0.15
+export const TYPE_PAUSE_ELLIPSIS_END = 0.45
