@@ -9,7 +9,7 @@
 
   /* 필자 글꼴: 패널 본문(content 문단)에만 쓴다. content/authors.yaml 의 font 값이
      body-r 면 --font-body-r, --font-body-r-size … 를 읽는다. 폰트마다 크기·굵기·행간이
-     다르게 느껴지면 아래 값만 고치면 된다. (r = 라온, i = 일룩시아) */
+     다르게 느껴지면 아래 값만 고치면 된다. (r = 라온, i = 일룩시아, d = 다락) */
   --font-body-r: 'GriunHangeulDdurae', 'Noto Serif KR', serif;
   --font-body-r-size: 18px;
   --font-body-r-line: 1.6;
@@ -19,4 +19,9 @@
   --font-body-i-size: 18px;
   --font-body-i-line: 1.6;
   --font-body-i-weight: 400;
+
+  --font-body-d: 'OngeulipGeungjeong', 'Noto Serif KR', serif;
+  --font-body-d-size: 18px;
+  --font-body-d-line: 1.6;
+  --font-body-d-weight: 400;
 }

@@ -30,7 +30,12 @@ function readYaml(file: string, rel: string, errors: string[]): { ok: boolean; v
   try {
     return { ok: true, value: parse(fs.readFileSync(file, 'utf8')) }
   } catch (e) {
-    errors.push(`${rel} — YAML 문법 오류: ${(e as Error).message.split('\n')[0]}`)
+    const msg = (e as Error).message.split('\n')[0]
+    // 자주 하는 실수에는 해결책을 붙여 준다
+    const hint = /reserved character|Plain value|Nested mappings|Implicit map keys/.test(msg)
+      ? ' → @ ` % ! & * | > 로 시작하거나 ": " · " #" 이 들어간 값은 "따옴표"로 감싸고, "- 필자: |" 처럼 ":" 뒤에는 공백을 넣으세요'
+      : ''
+    errors.push(`${rel} — YAML 문법 오류: ${msg}${hint}`)
     return { ok: false }
   }
 }

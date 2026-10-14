@@ -1,5 +1,6 @@
-# 필자. 세계 YAML 의 content 문단에서 키(r, i)로 부른다.
+# 필자. 세계 YAML 의 content 문단에서 키(r, i, d)로 부른다.
 # font 는 src/styles/tokens.css 의 --font-<font> 변수 묶음 이름이다.
 # 필자 이름(name)은 관리용이며 화면에는 표시하지 않는다.
 r: { name: 라온, font: body-r }
 i: { name: 일룩시아, font: body-i }
+d: { name: 다락, font: body-d }

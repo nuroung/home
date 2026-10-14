@@ -9,7 +9,7 @@ import type { World } from '../data/worldSchema'
 const TIMEOUT_MS = 3000
 
 /** 필자 글꼴 (src/styles/fonts.css) */
-const AUTHOR_FACES = ['400 18px GriunHangeulDdurae', '400 18px HakgyoansimNadeuri']
+const AUTHOR_FACES = ['400 18px GriunHangeulDdurae', '400 18px HakgyoansimNadeuri', '400 18px OngeulipGeungjeong']
 
 const loaded = new Set<string>()
 const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms))
