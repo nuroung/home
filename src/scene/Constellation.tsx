@@ -3,8 +3,9 @@ import {
   ORBITS,
   STARS,
   STAR_LINE_GAP,
-  STAR_RING,
+  STAR_PATH,
   STAR_SEGMENTS,
+  STAR_SHAPE,
   type OrbitId,
   type StarId,
 } from '../data/anchors'
@@ -13,17 +14,14 @@ import { CAMERA } from '../motion/camera'
 import {
   AURA_OPACITY,
   AURA_SCALE,
-  DOT_HOVER_STAR,
-  DOT_SCALE,
   RING_HOVER,
-  RING_SCALE,
   TAP_KEYFRAMES_STAR,
   TAP_POP,
 } from '../motion/interaction'
 import { panelFade } from '../motion/targets'
 import { useScene } from './scene'
 
-// 오리온자리: 선, 작은 점 별, ◉ 별.  YAML 이 있는 자리만 ◉(클릭 가능), 없으면 작은 점.
+// 오리온자리: 선, 작은 점 별, 지정 별(✦).  YAML 이 있는 자리만 지정 별(클릭 가능), 없으면 작은 점.
 
 const starIds = Object.keys(STARS) as StarId[]
 const litIds = starIds.filter((id) => worldAt(id))
@@ -58,11 +56,14 @@ function Star({ id }: { id: StarId }) {
   const world = worldAt(id)!
   const selected = sel === id
   const hovered = hover === id
-  const active = hovered || selected
+  const big = hovered || selected // 호버·선택이면 ×1.4
   const tap = useAnimationControls()
 
-  const { d: ringD, dot: dotD, box } = STAR_RING
+  const { box, size, hoverScale, half, wave } = STAR_SHAPE
   const c = box / 2
+  const bigHalf = (size * hoverScale) / 2 // 커졌을 때의 반지름(px)
+  const labelTop = c + bigHalf + 8
+  const color = selected ? '#ffffff' : '#e9e6f2'
   const enter = () => setHover(id)
   const leave = () => setHover(null)
 
@@ -89,50 +90,59 @@ function Star({ id }: { id: StarId }) {
         transition={{ opacity: AURA_OPACITY, scale: AURA_SCALE }}
         style={{ width: 72, height: 72, left: c - 36, top: c - 36 }}
       />
-      <span
-        className="ripple"
-        style={{
-          width: ringD,
-          height: ringD,
-          left: c - ringD / 2,
-          top: c - ringD / 2,
-          animation: selected ? 'wave 2s cubic-bezier(.2,.6,.3,1) infinite' : 'none',
-        }}
-      />
+      {/* 선택 시 퍼지는 원형 파동. scale 로 키우면 선이 같이 굵어지므로 width/height 를 키운다.
+          바깥 상자(contain)가 크기 변화의 영향을 이 안으로 가둔다. */}
+      {selected && (
+        <span
+          className="star-wave-box"
+          style={{ left: c, top: c, width: wave.to, height: wave.to, marginLeft: -wave.to / 2, marginTop: -wave.to / 2 }}
+        >
+          <span
+            className="star-wave"
+            style={
+              {
+                '--wave-from': `${wave.from}px`,
+                '--wave-to': `${wave.to}px`,
+                '--wave-line': `${wave.lineWidth}px`,
+              } as React.CSSProperties
+            }
+          />
+        </span>
+      )}
+      {/* 클릭 팝(.7→1.35→1) ▸ 호버·선택 크기(×1.4) ▸ 천천히 도는 회전 ▸ 다이아몬드.
+          크기와 회전이 같은 요소의 transform 을 두고 부딪히지 않도록 요소를 나눴다. */}
       <motion.span className="core" animate={tap} style={{ left: c, top: c }}>
         <motion.span
-          className="ring"
+          className="star-size"
           initial={false}
-          animate={{ scale: active ? RING_SCALE : 1 }}
+          animate={{ scale: big ? hoverScale : 1 }}
           transition={RING_HOVER}
-          style={{
-            width: ringD,
-            height: ringD,
-            left: -ringD / 2,
-            top: -ringD / 2,
-            animation: `starBlink ${s.blinkDur}s ease-in-out ${s.blinkDelay}s infinite`,
-          }}
-        />
-        <motion.span
-          className="dot"
-          initial={false}
-          animate={{ scale: active ? DOT_SCALE : 1 }}
-          transition={DOT_HOVER_STAR}
-          style={{
-            width: dotD,
-            height: dotD,
-            left: -dotD / 2,
-            top: -dotD / 2,
-            animation: `starBlink ${s.blinkDur}s ease-in-out ${s.blinkDelay}s infinite`,
-          }}
-        />
+          style={{ width: size, height: size, left: -size / 2, top: -size / 2 }}
+        >
+          <span className="star-spin" style={{ animation: `spin ${STAR_SHAPE.spinSec}s linear infinite` }}>
+            <svg
+              aria-hidden
+              width={size}
+              height={size}
+              viewBox={`${-half} ${-half} ${half * 2} ${half * 2}`}
+              style={{
+                display: 'block',
+                overflow: 'visible',
+                // 선택되면 깜빡임을 멈추고 순수 흰색으로 고정한다
+                animation: selected ? 'none' : `starBlink ${s.blinkDur}s ease-in-out ${s.blinkDelay}s infinite`,
+              }}
+            >
+              <path d={STAR_PATH} fill={color} stroke={color} strokeWidth={1} />
+            </svg>
+          </span>
+        </motion.span>
       </motion.span>
-      {active && (
-        <span className="label" style={{ top: c + ringD * 0.7 + 8 }}>
+      {big && (
+        <span className="label" style={{ top: labelTop }}>
           {world.label}
         </span>
       )}
-      {selected && <span className="mark" style={{ top: c + ringD * 0.7 + 32 }} />}
+      {selected && <span className="mark" style={{ top: labelTop + 24 }} />}
     </button>
   )
 }

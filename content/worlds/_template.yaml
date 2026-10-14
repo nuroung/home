@@ -2,16 +2,17 @@
 # ('_' 로 시작하는 파일은 불러오지 않습니다.)
 #
 # 사용할 수 있는 anchor
-#   오리온 ◉ 별 : meissa, betelgeuse, alnitak, rigel
-#   오리온 작은 점 별 (YAML을 추가하면 ◉ 로 바뀝니다) : bellatrix, mintaka, alnilam, saiph
+#   오리온 지정 별(✦) : world2153, world3605, world2146, world6178   (관측된 세계 번호가 이름이다)
+#   오리온 작은 점 별 (YAML을 추가하면 지정 별(✦)로 바뀝니다) : bellatrix, mintaka, alnilam, saiph
+#     (새 관측된 세계를 이 자리에 붙일 땐, src/data/anchors.ts 의 자리 이름을 worldNNNN 으로 바꾸고 파일·id·anchor 를 같게 맞춘다)
 #   흰 궤도의 부유하는 배 : ship
 #   회색 궤도의 조각난 세계 : fragment
 #
 # 주의 1: '#' 이 들어간 글은 반드시 따옴표로 감싸세요. 따옴표가 없으면 '#' 뒤가 주석으로 잘립니다.
 # 주의 2: 'content: |' 아래의 글은 앞에 공백 2칸 이상 들여써야 합니다.
 
-id: betelgeuse             # 파일 이름과 같게 (betelgeuse.yaml)
-anchor: betelgeuse         # 화면에서 붙을 자리 (위 목록 중 하나, 다른 파일과 겹치면 안 됨)
+id: world3605              # 파일 이름과 같게 (world3605.yaml)
+anchor: world3605          # 화면에서 붙을 자리 (위 목록 중 하나, 다른 파일과 겹치면 안 됨)
 label: "관측된 세계 #2390" # 대상 아래에 뜨는 이름
 eyebrow: OBSERVED · 2390   # 패널 맨 위 작은 영문
 title: 관측된 세계          # 패널 제목 (타이핑 효과)

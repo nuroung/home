@@ -1,4 +1,4 @@
-/* 오리온 ◉ 별. 호버·선택·팝은 Motion, 여기엔 모양만 둔다. */
+/* 오리온 지정 별(오목한 다이아몬드 ✦). 호버·선택·팝은 Motion, 여기엔 모양만 둔다. */
 .star {
   display: block;
   position: absolute;
@@ -17,29 +17,37 @@
   background: radial-gradient(circle, rgba(196, 192, 218, 0.18), rgba(196, 192, 218, 0) 62%);
   pointer-events: none;
 }
-.star .ripple {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(214, 210, 232, 0.6);
-  box-sizing: border-box;
-  opacity: 0;
-  pointer-events: none;
-}
 .star .core {
   position: absolute;
   width: 0;
   height: 0;
 }
-.star .ring {
+/* 호버·선택 크기(Motion scale) 를 받는 요소. 회전과 다른 요소라 transform 이 부딪히지 않는다. */
+.star .star-size {
   position: absolute;
-  border: 1px solid #e9e6f2;
-  border-radius: 50%;
-  box-sizing: border-box;
 }
-.star .dot {
+.star .star-spin {
   position: absolute;
+  inset: 0;
+}
+/* 선택 시 퍼지는 파동. 바깥 상자는 크기·레이아웃·페인트를 가둬 안쪽 크기 변화가 밖으로 번지지 않게 한다. */
+.star .star-wave-box {
+  position: absolute;
+  contain: strict;
+  pointer-events: none;
+}
+.star .star-wave {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--wave-from);
+  height: var(--wave-from);
+  box-sizing: border-box;
+  border: var(--wave-line) solid rgba(214, 210, 232, 0.6);
   border-radius: 50%;
-  background: #ffffff;
+  transform: translate(-50%, -50%);
+  opacity: 0.75;
+  animation: starWave 2s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
 }
 .star .label {
   position: absolute;
